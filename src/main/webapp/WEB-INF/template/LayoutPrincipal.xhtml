@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title><ui:insert name="titulo">Sistema de Locadora de Veículo</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+
+<h:body>
+
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="imagens" name="carregando.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<div class="container">
+		<header>
+			<div style="float: left">
+				<h:link outcome="/Home">
+					<h:graphicImage library="imagens" name="logo-algaworks.png" />
+				</h:link>
+			</div>
+
+			<div style="float: right; margin-right: 110px">
+				<h:form style="display: inline-block">
+					<p:menubar styleClass="menu-sistema">
+						<p:submenu label="Cadastros">
+							<p:menuitem value="Fabricante"
+								outcome="/views/fabricante/PesquisarFabricante" />
+							<p:menuitem value="Modelo Carro"
+								outcome="/views/modelo/PesquisarModelo" />
+							<p:menuitem value="Acessório"
+								outcome="/views/acessorio/PesquisarAcessorio" />
+							<p:menuitem value="Carro" outcome="/views/carro/PesquisarCarro" />
+							<p:separator />
+							<p:menuitem value="Funcionário" />
+							<p:menuitem value="Motorista" />
+						</p:submenu>
+						<p:menuitem value="Novo Aluguel" outcome="/views/aluguel/CadastrarAluguel" />
+						<p:submenu label="Relatórios">
+							<p:menuitem value="Receita por carro" />
+						</p:submenu>
+					</p:menubar>
+				</h:form>
+			</div>
+			<div style="clear: both"></div>
+		</header>
+
+		<section>
+			<div class="span12">
+				<ui:insert name="corpo"></ui:insert>
+			</div>
+		</section>
+
+		<p:separator style="margin-top: 20px" />
+
+		<footer>
+			Curso Online de Persistência de Dados com JPA 2 e Hibernate - <a
+				href="http://bit.ly/VJTAnC" target="_blank">www.algaworks.com</a>
+		</footer>
+	</div>
+
+</h:body>
+
+</html>
