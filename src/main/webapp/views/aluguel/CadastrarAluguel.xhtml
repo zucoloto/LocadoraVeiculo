@@ -33,12 +33,24 @@
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 
 				<p:outputLabel value="Carro" for="carro" />
-				<p:selectOneMenu id="carro" value="#{cadastrarAluguelBean.aluguel.carro}">
-					<f:selectItem itemLabel="Selecione um item..." noSelectionOption="true" />
+				<p:selectOneMenu id="carro"
+					value="#{cadastrarAluguelBean.aluguel.carro}">
+					<f:selectItem itemLabel="Selecione um item..."
+						noSelectionOption="true" />
 					<f:selectItems value="#{cadastrarAluguelBean.carros}" var="carro"
 						itemLabel="#{carro.modelo.descricao}: #{carro.placa}"
 						itemValue="#{carro}" />
 				</p:selectOneMenu>
+
+				<p:outputLabel value="Data da entrega" for="dataEntrega" />
+				<p:calendar id="dataEntrega" size="20"
+					value="#{cadastrarAluguelBean.aluguel.dataEntrega}"
+					pattern="dd/MM/yyyy HH:mm" stepMinute="10" />
+
+				<p:outputLabel value="Data da devolução" for="dataDevolucao" />
+				<p:calendar id="dataDevolucao" size="20"
+					value="#{cadastrarAluguelBean.aluguel.dataDevolucao}"
+					pattern="dd/MM/yyyy HH:mm" stepMinute="10" />
 
 				<p:outputLabel value="Valor total" for="valorTotal" />
 				<p:inputText id="valorTotal" size="20" maxlength="80"
@@ -50,7 +62,7 @@
 
 			<p:panelGrid columns="2" id="painelApolice"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
-				
+
 				<p:outputLabel value="Proteção terceiro" for="protecaoTerceiro" />
 				<p:selectBooleanCheckbox id="protecaoTerceiro"
 					value="#{cadastrarAluguelBean.aluguel.apoliceSeguro.protecaoTerceiro}" />

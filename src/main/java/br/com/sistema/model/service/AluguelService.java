@@ -1,6 +1,7 @@
 package br.com.sistema.model.service;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
@@ -21,6 +22,7 @@ public class AluguelService implements Serializable {
 		if (aluguel.getCarro() == null) {
 			throw new NegocioException("O carro é obrigatório!");
 		}
+		aluguel.setDataPedido(Calendar.getInstance());
 		this.aluguelDAO.salvar(aluguel);
 	}
 }

@@ -2,6 +2,8 @@ package br.com.sistema.model.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "aluguel")
@@ -32,6 +36,15 @@ public class Aluguel implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "apolice_seguro_id")
 	private ApoliceSeguro apoliceSeguro;
+
+	@Temporal(TemporalType.DATE)
+	private Calendar dataPedido;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataEntrega;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataDevolucao;
 
 	public Long getId() {
 		return id;
@@ -63,6 +76,30 @@ public class Aluguel implements Serializable {
 
 	public void setApoliceSeguro(ApoliceSeguro apoliceSeguro) {
 		this.apoliceSeguro = apoliceSeguro;
+	}
+
+	public Calendar getDataPedido() {
+		return dataPedido;
+	}
+
+	public void setDataPedido(Calendar dataPedido) {
+		this.dataPedido = dataPedido;
+	}
+
+	public Date getDataEntrega() {
+		return dataEntrega;
+	}
+
+	public void setDataEntrega(Date dataEntrega) {
+		this.dataEntrega = dataEntrega;
+	}
+
+	public Date getDataDevolucao() {
+		return dataDevolucao;
+	}
+
+	public void setDataDevolucao(Date dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
 	}
 
 	@Override
