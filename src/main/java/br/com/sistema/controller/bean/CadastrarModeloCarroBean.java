@@ -1,6 +1,7 @@
 package br.com.sistema.controller.bean;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.sistema.model.dao.FabricanteDAO;
+import br.com.sistema.model.entity.Categoria;
 import br.com.sistema.model.entity.Fabricante;
 import br.com.sistema.model.entity.ModeloCarro;
 import br.com.sistema.model.service.ModeloCarroService;
@@ -31,10 +33,13 @@ public class CadastrarModeloCarroBean implements Serializable {
 
 	private List<Fabricante> fabricantes;
 
+	private List<Categoria> categorias;
+
 	@PostConstruct
 	public void init() {
 		limpar();
 		carregarFabricante();
+		this.categorias = Arrays.asList(Categoria.values());
 	}
 
 	public void limpar() {
@@ -65,6 +70,10 @@ public class CadastrarModeloCarroBean implements Serializable {
 
 	public List<Fabricante> getFabricantes() {
 		return fabricantes;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
 	}
 
 }

@@ -26,13 +26,20 @@
 				style="margin-top: 20px" emptyMessage="Nenhum registro encontrado."
 				rows="20" paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
+				
 				<p:column headerText="Código"
 					style="text-align: center; width: 100px">
 					<h:outputText value="#{modelo.id}" />
 				</p:column>
+				
 				<p:column headerText="Nome">
 					<h:outputText value="#{modelo.descricao}" />
 				</p:column>
+				
+				<p:column headerText="Categoria">
+					<h:outputText value="#{modelo.categoria}" />
+				</p:column>
+				
 				<p:column style="width: 100px; text-align: center">
 					<p:button outcome="CadastrarModelo" icon="ui-icon-pencil"
 						title="Editar">

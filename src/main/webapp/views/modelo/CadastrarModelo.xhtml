@@ -25,7 +25,7 @@
 						action="#{cadastrarModeloCarroBean.salvar}" update="frmCadastro" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa" outcome="/views/modelo/PesquisarModelo"/>
+					<p:button value="Pesquisa" outcome="/views/modelo/PesquisarModelo" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -48,6 +48,14 @@
 				<p:outputLabel value="Modelo" for="modelo" />
 				<p:inputText id="modelo" size="60" maxlength="80"
 					value="#{cadastrarModeloCarroBean.modeloCarro.descricao}" />
+
+				<p:outputLabel value="Categoria" for="categoria" />
+				<p:selectOneMenu id="categoria"
+					value="#{cadastrarModeloCarroBean.modeloCarro.categoria}">
+					<f:selectItem itemLabel="Selecione a categoria..." />
+					<f:selectItems value="#{cadastrarModeloCarroBean.categorias}"
+						var="categoria" itemLabel="#{categoria}" itemValue="#{categoria}" />
+				</p:selectOneMenu>
 			</p:panelGrid>
 		</h:form>
 

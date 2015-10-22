@@ -3,6 +3,8 @@ package br.com.sistema.model.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +28,9 @@ public class ModeloCarro implements Serializable {
 	@JoinColumn(name = "fabricante_id")
 	private Fabricante fabricante;
 
+	@Enumerated(EnumType.STRING)
+	private Categoria categoria;
+
 	public Long getId() {
 		return id;
 	}
@@ -48,6 +53,14 @@ public class ModeloCarro implements Serializable {
 
 	public void setFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
