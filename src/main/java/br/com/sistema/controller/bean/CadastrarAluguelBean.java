@@ -9,9 +9,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.sistema.model.dao.CarroDAO;
+import br.com.sistema.model.dao.MotoristaDAO;
 import br.com.sistema.model.entity.Aluguel;
 import br.com.sistema.model.entity.ApoliceSeguro;
 import br.com.sistema.model.entity.Carro;
+import br.com.sistema.model.entity.Motorista;
 import br.com.sistema.model.service.AluguelService;
 import br.com.sistema.model.service.exception.NegocioException;
 import br.com.sistema.util.jsf.FacesUtil;
@@ -32,10 +34,16 @@ public class CadastrarAluguelBean implements Serializable {
 
 	private List<Carro> carros;
 
+	@Inject
+	private MotoristaDAO motoristaDAO;
+
+	private List<Motorista> motoristas;
+
 	@PostConstruct
 	public void init() {
 		limpar();
 		carregarCarro();
+		carregarMotorista();
 	}
 
 	public void limpar() {
@@ -60,6 +68,10 @@ public class CadastrarAluguelBean implements Serializable {
 		carros = carroDAO.buscarTodos();
 	}
 
+	public void carregarMotorista() {
+		motoristas = motoristaDAO.buscarTodos();
+	}
+
 	public Aluguel getAluguel() {
 		return aluguel;
 	}
@@ -70,6 +82,10 @@ public class CadastrarAluguelBean implements Serializable {
 
 	public List<Carro> getCarros() {
 		return carros;
+	}
+
+	public List<Motorista> getMotoristas() {
+		return motoristas;
 	}
 
 }

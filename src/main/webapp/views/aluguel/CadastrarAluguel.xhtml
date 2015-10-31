@@ -42,6 +42,15 @@
 						itemValue="#{carro}" />
 				</p:selectOneMenu>
 
+				<p:outputLabel value="Motorista" for="motorista" />
+				<p:selectOneMenu id="motorista"
+					value="#{cadastrarAluguelBean.aluguel.motorista}">
+					<f:selectItem itemLabel="Selecione o motorista" />
+					<f:selectItems value="#{cadastrarAluguelBean.motoristas}"
+						var="motorista" itemLabel="#{motorista.nome}"
+						itemValue="#{motorista}" />
+				</p:selectOneMenu>
+
 				<p:outputLabel value="Data da entrega" for="dataEntrega" />
 				<p:calendar id="dataEntrega" size="20"
 					value="#{cadastrarAluguelBean.aluguel.dataEntrega}"

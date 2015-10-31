@@ -33,16 +33,20 @@ public class Aluguel implements Serializable {
 	@JoinColumn(name = "carro_id")
 	private Carro carro;
 
+	@ManyToOne
+	@JoinColumn(name = "motorista_id")
+	private Motorista motorista;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "apolice_seguro_id")
 	private ApoliceSeguro apoliceSeguro;
 
 	@Temporal(TemporalType.DATE)
 	private Calendar dataPedido;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataEntrega;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDevolucao;
 
@@ -68,6 +72,14 @@ public class Aluguel implements Serializable {
 
 	public void setCarro(Carro carro) {
 		this.carro = carro;
+	}
+
+	public Motorista getMotorista() {
+		return motorista;
+	}
+
+	public void setMotorista(Motorista motorista) {
+		this.motorista = motorista;
 	}
 
 	public ApoliceSeguro getApoliceSeguro() {
