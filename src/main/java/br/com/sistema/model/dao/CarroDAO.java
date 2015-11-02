@@ -37,13 +37,24 @@ public class CarroDAO implements Serializable {
 		return em.find(Carro.class, id);
 	}
 
+	/*public List<Carro> buscarTodos() {
+		return em.createQuery("from Carro").getResultList();
+	}*/
+	
 	@SuppressWarnings("unchecked")
 	public List<Carro> buscarTodos() {
-		return em.createQuery("from Carro").getResultList();
+		return em.createNamedQuery("Carro.buscarTodos").getResultList();
 	}
+	
+	/*public Carro buscarCarroComAcessorios(Long id) {
+		return (Carro) em.createQuery("select c from Carro c LEFT JOIN c.acessorios a where c.id = ?")
+				.setParameter(1, id)
+				.getSingleResult();
+	}*/
 
 	public Carro buscarCarroComAcessorios(Long id) {
-		return (Carro) em.createQuery("select c from Carro c LEFT JOIN c.acessorios a where c.id = ?")
-				.setParameter(1, id).getSingleResult();
+		return em.createNamedQuery("Carro.buscarCarroComAcessorios", Carro.class)
+				.setParameter("codigo", id)
+				.getSingleResult();
 	}
 }
