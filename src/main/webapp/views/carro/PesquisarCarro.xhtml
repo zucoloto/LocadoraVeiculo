@@ -32,6 +32,10 @@
 					<h:outputText value="#{carro.id}" />
 				</p:column>
 
+				<p:column headerText="Modelo">
+					<h:outputText value="#{carro.modelo.descricao}" />
+				</p:column>
+				
 				<p:column headerText="Placa">
 					<h:outputText value="#{carro.placa}" />
 				</p:column>
@@ -70,12 +74,12 @@
 					</p:commandButton>
 
 				</p:column>
-
 			</p:dataTable>
 
 			<p:dialog id="mostraAcessoriosDialog" header="Acessórios"
 				widgetVar="mostraAcessorios" modal="true">
-				<p:dataList value="#{pesquisarCarroBean.carroSelecionado.acessorios}"
+				<p:dataList
+					value="#{pesquisarCarroBean.carroSelecionado.acessorios}"
 					var="acessorio" itemType="disc"
 					rendered="#{not empty pesquisarCarroBean.carroSelecionado.acessorios}">
     				#{acessorio.descricao}
