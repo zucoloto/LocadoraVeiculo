@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import br.com.sistema.model.dao.CarroDAO;
 import br.com.sistema.model.entity.Carro;
+import br.com.sistema.model.entitylazy.LazyCarroDataModel;
 import br.com.sistema.model.service.exception.NegocioException;
 import br.com.sistema.util.jsf.FacesUtil;
 
@@ -27,9 +28,12 @@ public class PesquisarCarroBean implements Serializable {
 
 	private List<Carro> carros = new ArrayList<>();
 
+	private LazyCarroDataModel lazyCarros;
+
 	@PostConstruct
 	public void inicializar() {
-		carros = carroDAO.buscarTodos();
+		// carros = carroDAO.buscarTodos();
+		lazyCarros = new LazyCarroDataModel(carroDAO);
 	}
 
 	public void excluir() {
@@ -56,6 +60,10 @@ public class PesquisarCarroBean implements Serializable {
 
 	public List<Carro> getCarros() {
 		return carros;
+	}
+
+	public LazyCarroDataModel getLazyCarros() {
+		return lazyCarros;
 	}
 
 }

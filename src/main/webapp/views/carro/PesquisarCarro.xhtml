@@ -21,11 +21,11 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:dataTable id="carrosTable" value="#{pesquisarCarroBean.carros}"
+			<p:dataTable id="carrosTable" value="#{pesquisarCarroBean.lazyCarros}"
 				var="carro" style="margin-top: 20px"
-				emptyMessage="Nenhum registro encontrado." rows="20"
-				paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom">
+				emptyMessage="Nenhum registro encontrado." rows="5" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				rowsPerPageTemplate="5,10,15" lazy="true">
 
 				<p:column headerText="Código"
 					style="text-align: center; width: 100px">
@@ -35,7 +35,7 @@
 				<p:column headerText="Modelo">
 					<h:outputText value="#{carro.modelo.descricao}" />
 				</p:column>
-				
+
 				<p:column headerText="Placa">
 					<h:outputText value="#{carro.placa}" />
 				</p:column>
