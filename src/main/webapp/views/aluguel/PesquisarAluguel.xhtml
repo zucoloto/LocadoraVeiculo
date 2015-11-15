@@ -1,0 +1,78 @@
+<ui:composition template="/WEB-INF/template/LayoutPrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Pesquisar Aluguel</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>Pesquisar Aluguel</h1>
+
+		<h:form id="frmFiltro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisa" id="botaoPesquisa"
+						action="#{pesquisarAluguelBean.pesquisar}" update="alugueisTable" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel" style="width: 100%"
+				columnClasses="rotulo, campo">
+				<p:outputLabel value="Data da entrega" for="dataEntrega" />
+				<p:calendar id="dataEntrega" size="20"
+					value="#{pesquisarAluguelBean.aluguel.dataEntrega}"
+					pattern="dd/MM/yyyy" />
+
+				<p:outputLabel value="Modelo do carro" for="modeloCarro" />
+				<p:selectOneMenu id="modeloCarro"
+					value="#{pesquisarAluguelBean.carro.modelo}">
+					<f:selectItem itemLabel="Selecione o modelo" />
+					<f:selectItems value="#{pesquisarAluguelBean.modelosCarros}"
+						var="modelosCarros" itemLabel="#{modelosCarros.descricao}"
+						itemValue="#{modelosCarros}" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+			<p:dataTable id="alugueisTable"
+				value="#{pesquisarAluguelBean.alugueis}" var="aluguel"
+				style="margin-top: 20px" emptyMessage="Nenhum aluguel encontrado."
+				rows="20" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Código"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{aluguel.id}" />
+				</p:column>
+				<p:column headerText="Data do Pedido">
+					<h:outputText value="#{aluguel.dataPedido.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Data da Entrega">
+					<h:outputText value="#{aluguel.dataEntrega}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Data da Devolução">
+					<h:outputText value="#{aluguel.dataDevolucao}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Valor total">
+					<h:outputText value="#{aluguel.valorTotal}" />
+				</p:column>
+				<p:column headerText="Carro">
+					<h:outputText
+						value="#{aluguel.carro.placa} - #{aluguel.carro.modelo.descricao}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
