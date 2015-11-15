@@ -1,5 +1,6 @@
 package br.com.sistema.criteria;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.sistema.model.entity.Aluguel;
 import br.com.sistema.model.entity.Carro;
 
 public class ExemplosCriteria {
@@ -38,6 +40,7 @@ public class ExemplosCriteria {
 		this.manager.close();
 	}
 
+	/* 8.3. Projeções */
 	@Test
 	public void projecoes() {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
@@ -52,6 +55,24 @@ public class ExemplosCriteria {
 		for (String placa : placas) {
 			System.out.println(placa);
 		}
+	}
+
+	
+	/*8.4. Funções de agregação*/
+	/*Alt + Shift + x = executa apenas teste selecionado*/
+	@Test
+	public void funcoesDeAgregacao() {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+
+		CriteriaQuery<BigDecimal> criteriaQuery = builder.createQuery(BigDecimal.class);
+
+		Root<Aluguel> aluguel = criteriaQuery.from(Aluguel.class);
+		criteriaQuery.select(builder.sum(aluguel.<BigDecimal> get("valorTotal")));
+
+		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
+		BigDecimal total = query.getSingleResult();
+
+		System.out.println("Soma de todos os alugueis: " + total);
 	}
 
 }
