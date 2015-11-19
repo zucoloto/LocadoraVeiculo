@@ -21,11 +21,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "carro")
-@NamedQueries({ 
-	@NamedQuery(name = "Carro.buscarTodos", 
-			query = "select c from Carro c"),
-	@NamedQuery(name = "Carro.buscarCarroComAcessorios", 
-			query = "select c from Carro c JOIN c.acessorios a where c.id = :codigo") })
+@NamedQueries({ @NamedQuery(name = "Carro.buscarTodos", 
+					query = "select c from Carro c inner join fetch c.modelo"),
+				@NamedQuery(name = "Carro.buscarCarroComAcessorios", 
+					query = "select c from Carro c JOIN c.acessorios a where c.id = :pId") })
 public class Carro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +42,7 @@ public class Carro implements Serializable {
 	@Column(name = "valor_diaria")
 	private BigDecimal valorDiaria;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "modelo_id")
 	private ModeloCarro modelo;
 

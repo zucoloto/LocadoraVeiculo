@@ -55,7 +55,7 @@ public class CarroDAO implements Serializable {
 	 */
 
 	public Carro buscarCarroComAcessorios(Long id) {
-		return em.createNamedQuery("Carro.buscarCarroComAcessorios", Carro.class).setParameter("codigo", id)
+		return em.createNamedQuery("Carro.buscarCarroComAcessorios", Carro.class).setParameter("pId", id)
 				.getSingleResult();
 	}
 
