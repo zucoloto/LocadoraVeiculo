@@ -24,7 +24,7 @@ import javax.persistence.Table;
 @NamedQueries({ @NamedQuery(name = "Carro.buscarTodos", 
 					query = "select c from Carro c inner join fetch c.modelo"),
 				@NamedQuery(name = "Carro.buscarCarroComAcessorios", 
-					query = "select c from Carro c JOIN c.acessorios a where c.id = :pId") })
+					query = "select c from Carro c left JOIN fetch c.acessorios a where c.id = :pId") })
 public class Carro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
