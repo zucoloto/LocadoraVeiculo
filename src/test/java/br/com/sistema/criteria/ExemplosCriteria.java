@@ -10,6 +10,7 @@ import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -147,6 +148,26 @@ public class ExemplosCriteria {
 		System.out.println("exemploFuncao");
 		for (Carro c : carros) {
 			System.out.println(c.getPlaca() + " - " + c.getCor());
+		}
+	}
+
+	/* 8.7. Ordenação de resultado */
+	@Test
+	public void exemploOrdenacao() {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Carro> criteriaQuery = builder.createQuery(Carro.class);
+
+		Root<Carro> carro = criteriaQuery.from(Carro.class);
+		Order order = builder.desc(carro.get("valorDiaria"));
+
+		criteriaQuery.select(carro);
+		criteriaQuery.orderBy(order);
+
+		TypedQuery<Carro> query = manager.createQuery(criteriaQuery);
+		List<Carro> carros = query.getResultList();
+
+		for (Carro c : carros) {
+			System.out.println(c.getPlaca() + " - " + c.getValorDiaria());
 		}
 	}
 }
