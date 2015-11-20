@@ -70,7 +70,7 @@
 						oncomplete="PF('confirmacaoExclusao').show();" process="@this"
 						update=":frmPesquisa:confirmacaoExclusaoDialog">
 						<f:setPropertyActionListener
-							target="#{pesquisarCarroBean.carroSelecionado}" value="#{carro}" />
+							target="#{pesquisarCarroBean.carroSelecionadoParaExcluir}" value="#{carro}" />
 					</p:commandButton>
 
 				</p:column>
@@ -90,7 +90,7 @@
 
 			<p:confirmDialog id="confirmacaoExclusaoDialog"
 				header="Exclusão de carro"
-				message="Tem certeza que deseja excluir o registro: #{pesquisarCarroBean.carroSelecionado.placa}?"
+				message="Tem certeza que deseja excluir o registro: #{pesquisarCarroBean.carroSelecionadoParaExcluir.placa}?"
 				widgetVar="confirmacaoExclusao" severity="alert">
 				<p:button value="Não"
 					onclick="PF('confirmacaoExclusao').hide(); return false;" />
