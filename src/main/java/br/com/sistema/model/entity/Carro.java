@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,10 +22,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "carro")
-@NamedQueries({ @NamedQuery(name = "Carro.buscarTodos", 
-					query = "select c from Carro c inner join fetch c.modelo"),
-				@NamedQuery(name = "Carro.buscarCarroComAcessorios", 
-					query = "select c from Carro c left JOIN fetch c.acessorios a where c.id = :pId") })
+@NamedQueries({ @NamedQuery(name = "Carro.buscarTodos", query = "select c from Carro c inner join fetch c.modelo"),
+		@NamedQuery(name = "Carro.buscarCarroComAcessorios", query = "select c from Carro c left JOIN fetch c.acessorios a where c.id = :pId") })
 public class Carro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -42,7 +41,7 @@ public class Carro implements Serializable {
 	@Column(name = "valor_diaria")
 	private BigDecimal valorDiaria;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "modelo_id")
 	private ModeloCarro modelo;
 
