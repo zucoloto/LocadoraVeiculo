@@ -8,6 +8,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp/views"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp/WEB-INF/template"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/metamodel"/>
         <property name="context-root" value="LocadoraVeiculo"/>
         <property name="java-output-path" value="/LocadoraVeiculo/target/classes"/>
     </wb-module>

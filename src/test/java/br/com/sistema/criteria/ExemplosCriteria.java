@@ -23,7 +23,9 @@ import org.junit.Test;
 
 import br.com.sistema.model.entity.Aluguel;
 import br.com.sistema.model.entity.Carro;
+import br.com.sistema.model.entity.Carro_;
 import br.com.sistema.model.entity.ModeloCarro;
+import br.com.sistema.model.entity.ModeloCarro_;
 
 public class ExemplosCriteria {
 
@@ -228,6 +230,26 @@ public class ExemplosCriteria {
 
 		for (Carro c : carros) {
 			System.out.println(c.getPlaca() + " - " + c.getValorDiaria());
+		}
+	}
+
+	/* 8.10. Metamodel */
+	@Test
+	public void exemploMetamodel() {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Carro> criteriaQuery = builder.createQuery(Carro.class);
+
+		Root<Carro> carro = criteriaQuery.from(Carro.class);
+		Join<Carro, ModeloCarro> modelo = (Join) carro.fetch(Carro_.modelo);
+
+		criteriaQuery.select(carro);
+		criteriaQuery.where(builder.equal(modelo.get(ModeloCarro_.descricao), "Siena"));
+
+		TypedQuery<Carro> query = manager.createQuery(criteriaQuery);
+		List<Carro> carros = query.getResultList();
+
+		for (Carro c : carros) {
+			System.out.println(c.getPlaca() + " - " + c.getModelo().getDescricao());
 		}
 	}
 
