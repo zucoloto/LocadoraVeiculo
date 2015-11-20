@@ -1,5 +1,7 @@
 package br.com.sistema.criteria;
 
+import java.util.Arrays;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -9,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.sistema.model.entity.Acessorio;
 import br.com.sistema.model.entity.Carro;
 import br.com.sistema.model.entity.Categoria;
 import br.com.sistema.model.entity.ModeloCarro;
@@ -36,7 +39,7 @@ public class ExemplosCascata {
 
 	/* 9.1. Gravação em cascata */
 	@Test
-	public void exemploEntidadeTransiente() {
+	public void cadastrarCarroModelo() {
 		Carro carro = new Carro();
 		carro.setCor("Preto");
 		carro.setPlaca("BBB-1111");
@@ -46,6 +49,23 @@ public class ExemplosCascata {
 		modelo.setDescricao("Ferrari");
 
 		carro.setModelo(modelo);
+
+		this.manager.getTransaction().begin();
+		this.manager.persist(carro);
+		this.manager.getTransaction().commit();
+	}
+	
+	/* 9.2. Exercício: Gravação em cascata */
+	@Test
+	public void cadastrarCarroAcessorios() {
+		Carro carro = new Carro();
+		carro.setCor("Preto");
+		carro.setPlaca("BBB-1111");
+
+		Acessorio acessorio = new Acessorio();
+		acessorio.setDescricao("Vidro Elétrico");
+
+		carro.setAcessorios(Arrays.asList(acessorio));
 
 		this.manager.getTransaction().begin();
 		this.manager.persist(carro);

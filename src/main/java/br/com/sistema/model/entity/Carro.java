@@ -45,7 +45,7 @@ public class Carro implements Serializable {
 	@JoinColumn(name = "modelo_id")
 	private ModeloCarro modelo;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "carro_acessorio", joinColumns = @JoinColumn(name = "carro_id") , inverseJoinColumns = @JoinColumn(name = "acessorio_id") )
 	private List<Acessorio> acessorios;
 
