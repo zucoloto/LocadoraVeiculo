@@ -1,4 +1,4 @@
-package br.com.sistema.criteria;
+package br.com.sistema.exemplos;
 
 import java.math.BigDecimal;
 import java.util.List;

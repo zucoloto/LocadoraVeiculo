@@ -1,4 +1,4 @@
-package br.com.sistema.criteria;
+package br.com.sistema.exemplos;
 
 import java.util.Arrays;
 
@@ -54,7 +54,7 @@ public class ExemplosCascata {
 		this.manager.persist(carro);
 		this.manager.getTransaction().commit();
 	}
-	
+
 	/* 9.2. Exercício: Gravação em cascata */
 	@Test
 	public void cadastrarCarroAcessorios() {
