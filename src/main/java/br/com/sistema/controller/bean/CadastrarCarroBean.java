@@ -1,12 +1,15 @@
 package br.com.sistema.controller.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.model.UploadedFile;
 
 import br.com.sistema.model.dao.AcessorioDAO;
 import br.com.sistema.model.dao.ModeloCarroDAO;
@@ -38,6 +41,8 @@ public class CadastrarCarroBean implements Serializable {
 
 	private List<Acessorio> acessorios;
 
+	private UploadedFile uploadedFile;
+
 	@PostConstruct
 	public void init() {
 		limpar();
@@ -47,10 +52,14 @@ public class CadastrarCarroBean implements Serializable {
 
 	public void limpar() {
 		this.carro = new Carro();
+		this.carro.setAcessorios(new ArrayList<Acessorio>());
 	}
 
 	public void salvar() {
 		try {
+			if (this.uploadedFile != null) {
+				this.carro.setFoto(this.uploadedFile.getContents());
+			}
 			this.carroService.salvar(this.carro);
 			FacesUtil.addSuccessMessage("Registro salvo com sucesso!");
 		} catch (NegocioException e) {
@@ -63,11 +72,11 @@ public class CadastrarCarroBean implements Serializable {
 	}
 
 	public void carregarModelos() {
-		modelos = modeloDAO.buscarTodos();
+		this.modelos = this.modeloDAO.buscarTodos();
 	}
 
 	public void carregarAcessorios() {
-		acessorios = acessorioDAO.buscarTodos();
+		this.acessorios = this.acessorioDAO.buscarTodos();
 	}
 
 	public Carro getCarro() {
@@ -84,6 +93,14 @@ public class CadastrarCarroBean implements Serializable {
 
 	public List<Acessorio> getAcessorios() {
 		return acessorios;
+	}
+
+	public UploadedFile getUploadedFile() {
+		return uploadedFile;
+	}
+
+	public void setUploadedFile(UploadedFile uploadedFile) {
+		this.uploadedFile = uploadedFile;
 	}
 
 }

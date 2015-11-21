@@ -2,6 +2,7 @@ package br.com.sistema.model.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,12 +14,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "carro")
@@ -45,12 +51,21 @@ public class Carro implements Serializable {
 	@JoinColumn(name = "modelo_id")
 	private ModeloCarro modelo;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "carro_acessorio", joinColumns = @JoinColumn(name = "carro_id") , inverseJoinColumns = @JoinColumn(name = "acessorio_id") )
 	private List<Acessorio> acessorios;
 
 	@OneToMany(mappedBy = "carro")
 	private List<Aluguel> alugueis;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCriacao;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataModificacao;
+	
+	@Lob
+	private byte[] foto;
 
 	public Long getId() {
 		return id;
@@ -114,6 +129,40 @@ public class Carro implements Serializable {
 
 	public void setAlugueis(List<Aluguel> alugueis) {
 		this.alugueis = alugueis;
+	}
+	
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public Date getDataModificacao() {
+		return dataModificacao;
+	}
+
+	public void setDataModificacao(Date dataModificacao) {
+		this.dataModificacao = dataModificacao;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+	@PrePersist
+	@PreUpdate
+	public void configuraDatasCriacaoAlteracao() {
+		this.dataModificacao = new Date();
+		
+		if (this.dataCriacao == null) {
+			this.dataCriacao = new Date();
+		}
 	}
 
 	@Override

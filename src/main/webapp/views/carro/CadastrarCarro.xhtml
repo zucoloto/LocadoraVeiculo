@@ -15,13 +15,14 @@
 
 		<h1>Novo Carro</h1>
 
-		<h:form id="frmCadastro">
+		<h:form id="frmCadastro" enctype="multipart/form-data">
 			<p:messages id="messages" autoUpdate="true" closable="true" />
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:commandButton value="Salvar" id="botaoSalvar"
-						action="#{cadastrarCarroBean.salvar}" update="frmCadastro" />
+						action="#{cadastrarCarroBean.salvar}" update="frmCadastro"
+						ajax="false" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:button value="Pesquisa" outcome="/views/carro/PesquisarCarro" />
@@ -54,6 +55,10 @@
 				<p:outputLabel value="Valor diária" for="valorDiaria" />
 				<p:inputText id="valorDiaria" size="20" maxlength="20"
 					value="#{cadastrarCarroBean.carro.valorDiaria}" />
+
+				<p:outputLabel value="Foto" for="foto" />
+				<p:fileUpload id="foto" value="#{cadastrarCarroBean.uploadedFile}"
+					mode="simple" />
 
 				<p:outputLabel value="Acessórios" for="acessorios" />
 				<p:selectManyCheckbox id="acessorios" styleClass="many-checkbox"
