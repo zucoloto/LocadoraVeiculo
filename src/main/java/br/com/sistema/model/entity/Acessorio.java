@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "acessorio")
 public class Acessorio implements Serializable {
@@ -27,6 +29,7 @@ public class Acessorio implements Serializable {
 		this.id = id;
 	}
 
+	@NotBlank(message="A descrição do acessório é obrigatório!")
 	public String getDescricao() {
 		return descricao;
 	}
